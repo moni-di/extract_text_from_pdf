@@ -1,0 +1,245 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Collecting PyPDF2\n",
+      "  Downloading https://files.pythonhosted.org/packages/b4/01/68fcc0d43daf4c6bdbc6b33cc3f77bda531c86b174cac56ef0ffdb96faab/PyPDF2-1.26.0.tar.gz (77kB)\n",
+      "Building wheels for collected packages: PyPDF2\n",
+      "  Building wheel for PyPDF2 (setup.py): started\n",
+      "  Building wheel for PyPDF2 (setup.py): finished with status 'done'\n",
+      "  Created wheel for PyPDF2: filename=PyPDF2-1.26.0-cp37-none-any.whl size=61091 sha256=d8b689aa5c834863399cd29ae35bb32e7587dbfc9350e237eb5eea115030d943\n",
+      "  Stored in directory: C:\\Users\\sharm\\AppData\\Local\\pip\\Cache\\wheels\\53\\84\\19\\35bc977c8bf5f0c23a8a011aa958acd4da4bbd7a229315c1b7\n",
+      "Successfully built PyPDF2\n",
+      "Installing collected packages: PyPDF2\n",
+      "Successfully installed PyPDF2-1.26.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "!pip install PyPDF2"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import PyPDF2 as pdf"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "file = open('data/main.pdf', 'rb')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "PdfReadWarning: Xref table not zero-indexed. ID numbers for objects will be corrected. [pdf.py:1736]\n"
+     ]
+    }
+   ],
+   "source": [
+    "reader = pdf.PdfFileReader(file)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<PyPDF2.pdf.PdfFileReader at 0x1fb369d5688>"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "reader"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "False"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "reader.getIsEncrypted()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{'/CrossMarkDomains#5B2#5D': 'elsevier.com',\n",
+       " '/CrossmarkMajorVersionDate': '2010-04-23',\n",
+       " '/CreationDate': \"D:20121121194556+05'30'\",\n",
+       " '/Subject': ', 59 (2012) 297-303. doi:10.1016/j.sbspro.2012.09.278',\n",
+       " '/Author': 'Nazlia Omar',\n",
+       " '/Creator': 'Elsevier',\n",
+       " '/Keywords': \"Bloom's taxonomy; natural language processing; rule-based\",\n",
+       " '/Producer': 'Acrobat Distiller 10.1.4 (Windows)',\n",
+       " '/ElsevierWebPDFSpecifications': '6.4',\n",
+       " '/CrossmarkDomainExclusive': 'true',\n",
+       " '/robots': 'noindex',\n",
+       " '/ModDate': \"D:20141104100113+05'30'\",\n",
+       " '/doi': '10.1016/j.sbspro.2012.09.278',\n",
+       " '/CrossMarkDomains#5B1#5D': 'sciencedirect.com',\n",
+       " '/Title': \"Automated Analysis of Exam Questions According to Bloom's Taxonomy\"}"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "reader.getDocumentInfo()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "7"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "reader.getNumPages()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "page1 = reader.getPage(0).extractText()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\" Procedia - Social and Behavioral Sciences   59  ( 2012 )  297 Œ 303 \\n1877-0428 © 2011 Published by Elsevier Ltd. Selection and/or peer reviewed under responsibility of the UKM Teaching and Learning Congress 2011doi: 10.1016/j.sbspro.2012.09.278 UKM Teaching and Learning Congress 2011 Automated analysis of exam questions according to bloom™s taxonomy  \\nNazlia Omara,, Syahidah Sufi Harisa, Rosilah Hassana, Haslina Arshad\\na, Masura \\nRahmata, Noor Faridatul Ainun Zainala & Rozli ZulkiflibaFaculty of Information Science and Technology, Universiti Kebangsaan Malaysia  \\nbFaculty of Engineering and Build Environment, Universiti Kebangsaan Malaysia  \\nAbstract Bloom's Taxonomy is a classification of learning objectives within education that educators set for students. The cognitive \\ndomain within this taxonomy is designed to verify a student's cognitive level during a written examination. Educators may \\nsometimes face the challenge in analysing whether their examination questions comply within the requirements of the Bloom™s \\ntaxonomy at different cognitive levels. This paper proposes an automated analysis of the exam questions to determine the \\nappropriate category based on this taxonomy. This rule-based approach applies Natural Language Processing (NLP) techniques \\nto identify important keywords and verbs, which may assist in the identification of the category of a question. This work focus\\nes \\non the computer programming subject domain. At present, a set of 100 questions (70 training set and 30 test set) is used in the\\nresearch. Preliminary results indicate that the rules may successfully assist in the identification of the Bloom™s taxonomy \\ncategory correctly in the exam questions. \\n© 2011 Published by Elsevier Ltd. Selection and/or peer reviewed under responsibility of the UKM Teaching and Learning \\nCongress 2011. Keywords: Bloom™s taxonomy; natural language processing; rule-based\\n1.Introduction \\nThere are many types of assessment or 'testing' to access student's learning curves. However, written examination \\nis the most common approach used by any higher education institutions for students' assessment. Question is an \\nelement that is intertwined with the examination. Questions raised in the paper plays an important role in efforts to \\ntest the students' overall cognitive levels held each semester. Effective style of\\n questioning as described by Swart \\n(2010) is always an issue to help studen\\nts attend to the desired learning outcome. Furthermore, to make it effective, \\nbalancing between lower and higher\\n-level question is a must Swart (20\\n10). Bloom's Taxonomy, created by Bloom \\n(1956), has been widely accepted as a guideline in designing reasonable examination questions belonging to various \\ncognitive levels. The hierarchical models of Bloom™s are widely used in education fields (Chang & Chung, 2009) \\n\\nconstructing questions (Lister & \\nLeaney, 2003), to ensure balancing and stud\\nent cognitive mastery (Oliver et al., \\n* Corresponding author. Tel.: +6-03- 8921-6733; fax: +6-03-8925-6184 \\nE-mail address: no@ftsm.ukm.my \\nAvailable online at \\nwww.sciencedirect.com\\n© 2011 Published by Elsevier Ltd. Selection and/or peer reviewed under responsibility of the UKM Teaching and \\nLearning Congress 2011Open access under CC BY-NC-ND license.Open access under CC BY-NC-ND license.\""
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "page1"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "with open('data/pdf_text.txt', 'w', encoding='utf-8') as file1:\n",
+    "    for i in range(reader.getNumPages()):\n",
+    "        page = reader.getPage(i).extractText()\n",
+    "        file1.write(page)\n",
+    "        file1.write('\\n')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# PyMuPDF is much more better than PyPDF2."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.4"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
